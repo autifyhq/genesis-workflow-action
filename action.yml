@@ -1,0 +1,72 @@
+name: "Genesis Workflow"
+description: "Trigger a Genesis workflow, wait for completion, and return the results"
+author: "Autify"
+
+branding:
+  icon: "play-circle"
+  color: "blue"
+
+inputs:
+  api-key:
+    description: "API key for the Genesis platform"
+    required: true
+  api-url:
+    description: "Base URL for the Genesis API"
+    required: false
+    default: "https://genesis-v2.autify.com"
+  workflow-id:
+    description: "ID of the Genesis workflow template to trigger"
+    required: true
+  inputs:
+    description: "JSON object of inputs to pass to the workflow (e.g., '{\"release_tag\": \"v1.0.0\"}')"
+    required: false
+    default: "{}"
+  output-block:
+    description: "Name of a specific workflow block whose output to extract. If not set, all block outputs are returned."
+    required: false
+    default: ""
+  poll-interval:
+    description: "Interval in seconds between status polls"
+    required: false
+    default: "120"
+  max-wait-time:
+    description: "Maximum time in seconds to wait for the workflow to complete"
+    required: false
+    default: "600"
+  wait:
+    description: "Whether to wait for the workflow to complete. Set to 'false' to trigger and return immediately."
+    required: false
+    default: "true"
+
+outputs:
+  execution-id:
+    description: "The Genesis workflow execution ID"
+    value: ${{ steps.run.outputs.execution-id }}
+  status:
+    description: "Final workflow status (completed, failed, cancelled, or running if wait=false)"
+    value: ${{ steps.run.outputs.status }}
+  output:
+    description: "Output from the specified output-block, or all block outputs as JSON"
+    value: ${{ steps.run.outputs.output }}
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "22"
+
+    - name: Run Genesis workflow
+      id: run
+      shell: bash
+      env:
+        GENESIS_API_KEY: ${{ inputs.api-key }}
+        GENESIS_API_BASE_URL: ${{ inputs.api-url }}
+        GENESIS_WORKFLOW_ID: ${{ inputs.workflow-id }}
+        GENESIS_WORKFLOW_INPUTS: ${{ inputs.inputs }}
+        OUTPUT_BLOCK: ${{ inputs.output-block }}
+        POLL_INTERVAL: ${{ inputs.poll-interval }}
+        MAX_WAIT_TIME: ${{ inputs.max-wait-time }}
+        WAIT_FOR_COMPLETION: ${{ inputs.wait }}
+      run: node ${{ github.action_path }}/scripts/run.mjs

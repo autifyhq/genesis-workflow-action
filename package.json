@@ -1,0 +1,7 @@
+{
+	"name": "genesis-workflow-action",
+	"version": "1.0.0",
+	"description": "GitHub Action to trigger Genesis workflows and retrieve results",
+	"type": "module",
+	"license": "MIT"
+}
