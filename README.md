@@ -1,6 +1,6 @@
 # Genesis Workflow Action
 
-A GitHub Action to trigger [Genesis](https://github.com/autifyhq/genesis-v2) workflows, wait for completion, and retrieve the results. Use it to integrate any Genesis workflow into your CI/CD pipeline.
+A GitHub Action to trigger [Genesis](https://autify.com/products/autify-genesis) workflows, wait for completion, and retrieve the results. Use it to integrate any Genesis workflow into your CI/CD pipeline.
 
 ## Usage
 
