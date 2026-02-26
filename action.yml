@@ -55,7 +55,7 @@ runs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: "22"
+        node-version: "24"
 
     - name: Run Genesis workflow
       id: run
@@ -69,4 +69,4 @@ runs:
         POLL_INTERVAL: ${{ inputs.poll-interval }}
         MAX_WAIT_TIME: ${{ inputs.max-wait-time }}
         WAIT_FOR_COMPLETION: ${{ inputs.wait }}
-      run: node ${{ github.action_path }}/scripts/run.mjs
+      run: node ${{ github.action_path }}/dist/src/run.js
