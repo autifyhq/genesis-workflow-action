@@ -101,7 +101,7 @@ If you don't specify `output-block`, the action returns all block outputs as a J
 | Input | Required | Default | Description |
 |-------|----------|---------|-------------|
 | `api-key` | Yes | — | API key for the Genesis platform |
-| `api-url` | No | `https://genesis-v2.autify.com` | Base URL for the Genesis API. Override for self-hosted instances. |
+| `api-url` | No | `https://genesis.autify.com` | Base URL for the Genesis API. Override for self-hosted instances. |
 | `workflow-id` | Yes | — | Genesis workflow template ID to trigger |
 | `inputs` | No | `{}` | JSON object of inputs to pass to the workflow |
 | `output-block` | No | — | Name of a specific block to extract output from. If not set, returns all outputs as JSON. |

@@ -13,7 +13,7 @@ inputs:
   api-url:
     description: "Base URL for the Genesis API"
     required: false
-    default: "https://genesis-v2.autify.com"
+    default: "https://genesis.autify.com"
   workflow-id:
     description: "ID of the Genesis workflow template to trigger"
     required: true
